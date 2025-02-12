@@ -62,27 +62,21 @@
                                 <h3>Book Your Appointment</h3>
                                 <p>Fill out the form below and we'll contact you to confirm your appointment</p>
                             </div>
-                            <form>
+                            <form action="{% url 'make_appointment' %}" method="post">
+                                {% csrf_token %}
                                 <div class="row g-4">
                                     <div class="col-md-6">
                                         <label for="department" class="form-label">Department</label>
                                         <select id="department" class="form-select" required>
-                                            <option value="">Select Department</option>
-                                            <option value="cardiology">Cardiology</option>
-                                            <option value="neurology">Neurology</option>
-                                            <option value="orthopedics">Orthopedics</option>
-                                            <option value="pediatrics">Pediatrics</option>
+                                            {% for department in departments %}
+                                                <option value="{{ department.id }}">{{ department.name }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="doctor" class="form-label">Doctor</label>
                                         <select id="doctor" class="form-select" required>
                                             <option value="">Select Doctor</option>
-                                            <option data-department="cardiology" value="dr_smith">Dr. Smith</option>
-                                            <option data-department="cardiology" value="dr_johnson">Dr. Johnson</option>
-                                            <option data-department="neurology" value="dr_brown">Dr. Brown</option>
-                                            <option data-department="orthopedics" value="dr_jones">Dr. Jones</option>
-                                            <option data-department="pediatrics" value="dr_davis">Dr. Davis</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
