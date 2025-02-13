@@ -67,7 +67,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6">
                                         <label for="department" class="form-label">Department</label>
-                                        <select id="department" class="form-select" required>
+                                        <select id="department" class="form-select" name="department" required>
                                             {% for department in departments %}
                                                 <option value="{{ department.id }}">{{ department.name }}</option>
                                             {% endfor %}
@@ -75,26 +75,26 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="doctor" class="form-label">Doctor</label>
-                                        <select id="doctor" class="form-select" required>
+                                        <select id="doctor" class="form-select" name="doctor" required>
                                             <option value="">Select Doctor</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="appointment-date" class="form-label">Appointment Date</label>
-                                        <select id="appointment-date" class="form-select" required>
+                                        <select id="appointment-date" class="form-select" name="date" required>
                                             <option value="">Select Date</option>
                                             {# This will be populated via AJAX once a doctor is selected #}
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="appointment-time" class="form-label">Appointment Time</label>
-                                        <select id="appointment-time" class="form-select" required>
+                                        <select id="appointment-time" class="form-select" name="time" required>
                                             <option value="">Select Time</option>
                                         </select>
                                     </div>
                                     <div class="col-12">
                                         <label for="comments" class="form-label">Additional Comments</label>
-                                        <textarea class="form-control" id="comments" rows="4"
+                                        <textarea class="form-control" id="comments" rows="4" name="message"
                                                   placeholder="Please share any specific concerns or requirements"></textarea>
                                     </div>
                                     <div class="col-12">

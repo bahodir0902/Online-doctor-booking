@@ -14,18 +14,6 @@ def home(request):
     # print(context)
     return render(request, 'index.html', context=context)
 
-def make_appointment(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        date = request.POST.get('date')
-        department = request.POST.get('department')
-        doctor = request.POST.get('doctor')
-        message = request.POST.get('message')
-
-        print(name, date, doctor, department, message)
-    # return render(request, 'index.html')
-    return redirect('home')
-
 def auth(request):
     return render(request, 'login_register.html')
 
@@ -79,15 +67,40 @@ def get_available_datetime(request):
     selected_date = request.GET.get('date')
     date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
     weekday = date_obj.strftime('%A')
-    print(weekday)
-    # here would be mine actual logic for finding available times
+
     times = str(Availability.objects.filter(doctor_id=doctor_id, days_of_week=weekday)).split()
-    start_time = times[3][1:]
-    end_time = times[5][:-4]
-    print(start_time, end_time)
+    if len(times) < 6:
+        return JsonResponse([], safe=False)
 
+    start_time = datetime.strptime(times[3][1:], '%H:%M:%S').time()
+    end_time = datetime.strptime(times[5][:-4], '%H:%M:%S').time()
+    actual_end_time = datetime.combine(date_obj, end_time)
+    now = datetime.now()
+    step = timedelta(minutes=30)
+    current_time = max(datetime.combine(date_obj, start_time), now)
 
-    available_slots = ['09:00', '10:30', '13:00', '15:30']  # This should come from your scheduling logic
+    booked_slots = Appointment.objects.filter(doctor_id=doctor_id, status__in=('Pending', 'Confirmed') , datetime__date=date_obj.date())
+    booked_times = {appt.datetime.strftime('%H:%M:%S') for appt in booked_slots}
+
+    available_slots = []
+    while current_time.time() <= actual_end_time.time():
+        temp = current_time.strftime('%H:%M:%S')
+        if temp not in booked_times:
+            available_slots.append(temp)
+        current_time += step
+
     return JsonResponse(available_slots, safe=False)
+
+def make_appointment(request):
+    if request.method == 'POST':
+        department = request.POST.get('department')
+        doctor = request.POST.get('doctor')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        message = request.POST.get('message')
+
+        print(department, doctor, date, time, message)
+    # return render(request, 'index.html')
+    return redirect('home')
 
 
