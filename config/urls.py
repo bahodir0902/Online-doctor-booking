@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from medicine.views import home, make_appointment, auth, login, register, get_doctors
+from medicine.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,8 @@ urlpatterns = [
     path('make-appointment/', make_appointment, name='make_appointment'),
     path('login/', auth, name='login_register'),
     # path('register/', auth, name='login_register'),
-    path('get-doctors/', get_doctors, name='get_doctors')
+    path('get-doctors/', get_doctors, name='get_doctors'),
+    path('get-available-datetime/', get_available_datetime, name='get_available_datetime'),
+    path('get-available-dates/', get_available_dates, name='get_available_dates')
 
 ]

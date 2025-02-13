@@ -81,11 +81,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="appointment-date" class="form-label">Appointment Date</label>
-                                        <input type="date" class="form-control" id="appointment-date" required>
+                                        <select id="appointment-date" class="form-select" required>
+                                            <option value="">Select Date</option>
+                                            {# This will be populated via AJAX once a doctor is selected #}
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="appointment-time" class="form-label">Appointment Time</label>
-                                        <input type="time" class="form-control" id="appointment-time" required>
+                                        <select id="appointment-time" class="form-select" required>
+                                            <option value="">Select Time</option>
+                                        </select>
                                     </div>
                                     <div class="col-12">
                                         <label for="comments" class="form-label">Additional Comments</label>

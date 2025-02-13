@@ -99,6 +99,6 @@ class Availability(models.Model):
 
     @override
     def __str__(self) -> str:
-        return f"{self.doctor.user.first_name} - {self.days_of_week} ({self.start_time} to {self.end_time})"
+        return f"{self.days_of_week} ({self.start_time} to {self.end_time})"
 
 
