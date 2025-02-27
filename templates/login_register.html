@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}Login/Register - MedBook{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="/static/css/login_register.css">
+{% endblock %}
+
+{% block content %}
+    <section class="auth-container">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card auth-card">
+                        <div class="card-header text-center">
+                            <img src="/static/images/logo.png" alt="MedBook Logo" height="40" class="mb-4">
+                            <ul class="nav nav-pills nav-fill" id="authTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <!-- Use both classes: "nav-link" (for Bootstrap) and "auth-nav-link" (for our custom styling) -->
+                                    <button class="nav-link auth-nav-link active" id="login-tab" data-bs-toggle="pill"
+                                            data-bs-target="#login" type="button"
+                                            role="tab" aria-controls="login" aria-selected="true">
+                                        Sign In
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link auth-nav-link" id="register-tab" data-bs-toggle="pill"
+                                            data-bs-target="#register" type="button"
+                                            role="tab" aria-controls="register" aria-selected="false">
+                                        Create Account
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="authTabContent">
+                                <!-- LOGIN TAB -->
+
+                                <div class="tab-pane fade show active" id="login" role="tabpanel"
+                                     aria-labelledby="login-tab">
+                                    <form method="post" action="{% url 'accounts:login' %}">
+                                        {% csrf_token %}
+                                        {{ login_form.as_p }}
+                                        <div class="mb-4 d-flex justify-content-between align-items-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="remember-me"
+                                                       name="remember_me">
+                                                <label class="form-check-label" for="remember-me">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                            <a href="{%  url 'accounts:forgot_password' %}" class="text-primary text-decoration-none">Forgot password?</a>
+                                        </div>
+                                        <button type="submit">Sign In</button>
+                                    </form>
+                                </div>
+
+                                <!-- REGISTER TAB -->
+                                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                    <form method="post" action="{% url 'accounts:register' %}">
+                                        {% csrf_token %}
+                                        {{ register_form.as_p }}
+                                        <div class="mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="terms-accept"
+                                                       required>
+                                                <label class="form-check-label" for="terms-accept">
+                                                    I agree to the <a href="#" class="text-primary">Terms of Service</a>
+                                                    and <a href="#" class="text-primary">Privacy Policy</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="submit">Create Account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block title %}Login/Register - MedBook{% endblock %}#}
+{##}
+{#{% block extra_css %}#}
+{#    <link rel="stylesheet" href="/static/css/login_register.css">#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <section class="auth-container">#}
+{#        <div class="container py-5">#}
+{#            <div class="row justify-content-center">#}
+{#                <div class="col-md-8 col-lg-6">#}
+{#                    <div class="card auth-card">#}
+{#                        <div class="card-header text-center">#}
+{#                            <img src="/static/images/logo.png" alt="MedBook Logo" height="40" class="mb-4">#}
+{#                            <ul class="nav nav-pills nav-fill" id="authTab" role="tablist">#}
+{#                                <li class="nav-item" role="presentation">#}
+{#                                    <!-- Use both classes: "nav-link" (for Bootstrap) and "auth-nav-link" (for our custom styling) -->#}
+{#                                    <button class="nav-link auth-nav-link active" id="login-tab" data-bs-toggle="pill"#}
+{#                                            data-bs-target="#login" type="button"#}
+{#                                            role="tab" aria-controls="login" aria-selected="true">#}
+{#                                        Sign In#}
+{#                                    </button>#}
+{#                                </li>#}
+{#                                <li class="nav-item" role="presentation">#}
+{#                                    <button class="nav-link auth-nav-link" id="register-tab" data-bs-toggle="pill"#}
+{#                                            data-bs-target="#register" type="button"#}
+{#                                            role="tab" aria-controls="register" aria-selected="false">#}
+{#                                        Create Account#}
+{#                                    </button>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="tab-content" id="authTabContent">#}
+{#                                <!-- LOGIN TAB -->#}
+{#                                {{ forms }}#}
+{#                                <div class="tab-pane fade show active" id="login" role="tabpanel"#}
+{#                                     aria-labelledby="login-tab">#}
+{#                                    <form action="{% url 'accounts:login' %}" method="post">#}
+{#                                        {% csrf_token %}#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="login-email" class="form-label">Email Address</label>#}
+{#                                            <input type="email" class="form-control" id="login-email"#}
+{#                                                   placeholder="you@example.com" name="email" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="login-password" class="form-label">Password</label>#}
+{#                                            <input type="password" class="form-control" id="login-password"#}
+{#                                                   placeholder="Enter your password" name="password" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4 d-flex justify-content-between align-items-center">#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" id="remember-me" name="remember_me">#}
+{#                                                <label class="form-check-label" for="remember-me">#}
+{#                                                    Remember me#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <a href="#" class="text-primary text-decoration-none">Forgot password?</a>#}
+{#                                        </div>#}
+{#                                        <div class="d-grid">#}
+{#                                            <button type="submit" class="btn btn-auth btn-login">Sign In</button>#}
+{#                                        </div>#}
+{#                                    </form>#}
+{#                                </div>#}
+{##}
+{#                                <!-- REGISTER TAB -->#}
+{#                                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">#}
+{#                                    <form action="{% url 'accounts:register' %}" method="post">#}
+{#                                        {% csrf_token %}#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="register-name" class="form-label">First Name</label>#}
+{#                                            <input type="text" class="form-control" id="register-name"#}
+{#                                                   placeholder="Enter your first name" name="first_name" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="register-name" class="form-label">Last Name</label>#}
+{#                                            <input type="text" class="form-control" id="register-name"#}
+{#                                                   placeholder="Enter your last name" name="last_name" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="register-email" class="form-label">Email Address</label>#}
+{#                                            <input type="email" class="form-control" id="register-email"#}
+{#                                                   placeholder="you@example.com" name="email" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="register-password" class="form-label">Password</label>#}
+{#                                            <input type="password" class="form-control" id="register-password"#}
+{#                                                   placeholder="Create a password" name="initial_password" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4">#}
+{#                                            <label for="register-confirm-password" class="form-label">Confirm Password</label>#}
+{#                                            <input type="password" class="form-control" id="register-confirm-password"#}
+{#                                                   placeholder="Confirm your password" name="second_password" required>#}
+{#                                        </div>#}
+{#                                        <div class="mb-4">#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" id="terms-accept" required>#}
+{#                                                <label class="form-check-label" for="terms-accept">#}
+{#                                                    I agree to the <a href="#" class="text-primary">Terms of Service</a>#}
+{#                                                    and <a href="#" class="text-primary">Privacy Policy</a>#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="d-grid">#}
+{#                                            <button type="submit" class="btn btn-auth btn-register">Create Account</button>#}
+{#                                        </div>#}
+{#                                    </form>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#{% endblock %}#}

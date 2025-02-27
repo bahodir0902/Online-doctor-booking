@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - MedBook{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Your Health, Our Priority</h1>
+            <p>Experience seamless medical appointment booking with top healthcare professionals in your area.</p>
+            <a href="#booking" class="btn btn-light btn-lg">Book Your Appointment</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h4>Easy Scheduling</h4>
+                        <p>Book appointments quickly and easily with our intuitive booking system.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h4>Expert Doctors</h4>
+                        <p>Access to a network of qualified and experienced healthcare professionals.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>24/7 Availability</h4>
+                        <p>Book your appointments anytime, anywhere with our online platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="booking" class="booking-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card booking-card">
+                        <div class="card-body">
+                            <div class="booking-header">
+                                <h3>Book Your Appointment</h3>
+                                <p>Fill out the form below and we'll contact you to confirm your appointment</p>
+                            </div>
+                            <form action="{% url 'make_appointment' %}" method="post">
+                                {% csrf_token %}
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label for="department" class="form-label">Department</label>
+                                        <select id="department" class="form-select" name="department" required>
+                                            {% for department in departments %}
+                                                <option value="{{ department.id }}">{{ department.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="doctor" class="form-label">Doctor</label>
+                                        <select id="doctor" class="form-select" name="doctor" required>
+                                            <option value="">Select Doctor</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="appointment-date" class="form-label">Appointment Date</label>
+                                        <select id="appointment-date" class="form-select" name="date" required>
+                                            <option value="">Select Date</option>
+                                            {# This will be populated via AJAX once a doctor is selected #}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="appointment-time" class="form-label">Appointment Time</label>
+                                        <select id="appointment-time" class="form-select" name="time" required>
+                                            <option value="">Select Time</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="comments" class="form-label">Additional Comments</label>
+                                        <textarea class="form-control" id="comments" rows="4" name="message"
+                                                  placeholder="Please share any specific concerns or requirements"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn booking-btn w-100">Book Appointment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+    <script src="/static/js/home.js"></script>
+{% endblock %}
