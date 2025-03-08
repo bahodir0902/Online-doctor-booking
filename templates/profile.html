@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br><p>{{ request.user.user_permissions }}</p><br>
+<p>{{ request.user.get_all_permissions }}</p>
+
+{% endblock %}

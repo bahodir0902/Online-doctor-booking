@@ -5,6 +5,8 @@ from _datetime import datetime, timedelta
 from django.contrib.auth import logout, authenticate, login as login_user
 from django.contrib.auth.decorators import login_required
 from .forms import UserLoginForm
+from accounts.models import Doctor
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
@@ -86,7 +88,7 @@ def get_available_datetime(request):
     return JsonResponse(available_slots, safe=False)
 
 
-@login_required(login_url='/auth', redirect_field_name=None)
+@login_required
 def make_appointment(request):
     if request.method == 'POST':
         department = request.POST.get('department')
@@ -94,9 +96,17 @@ def make_appointment(request):
         date = request.POST.get('date')
         time = request.POST.get('time')
         message = request.POST.get('message')
+        user_id = request.user.pk
 
-        print(department, doctor, date, time, message)
-    # return render(request, 'index.html')
+        date_time = date + ' ' + time
+
+        user_db = get_user_model().objects.filter(pk=user_id).first()
+        doctor_db = Doctor.objects.filter(pk=doctor).first()
+        print(f'{date_time=}')
+        print(department, doctor, date, time, message, request.user.pk)
+        print(f'{doctor_db=}')
+        Appointment.objects.create(datetime=date_time, doctor=doctor_db, user=user_db, status=Appointment.Status.PENDING, message=message)
+        return redirect('home')
     return redirect('home')
 
 

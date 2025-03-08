@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/doctor_home_page.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+{% block content %}
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="doctor-avatar">
+                    <img src="{% static 'images/default-avatar.png' %}" alt="Doctor Avatar" onerror="this.src='https://ui-avatars.com/api/?name={{ request.user.first_name }}+{{ request.user.last_name }}&background=0D8ABC&color=fff'">
+                </div>
+                <h2>Dr. {{ request.user.first_name }}</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-calendar-alt"></i> <span>Appointments</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-user-injured"></i> <span>Patients</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-comment-medical"></i> <span>Messages</span>
+                            {% if unread_notifications > 0 %}
+                                <span class="badge">{{ unread_notifications }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="quick-actions">
+                    <button class="btn-primary"><i class="fas fa-plus"></i> New Appointment</button>
+                    <div class="dropdown">
+                        <button class="btn-icon"><i class="fas fa-bell"></i>
+                            {% if unread_notifications > 0 %}
+                                <span class="badge-small">{{ unread_notifications }}</span>
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="welcome-card">
+                <div class="welcome-text">
+                    <h2>Welcome back, Dr. {{ request.user.first_name }}</h2>
+                    <p>Here's what's happening today in your practice</p>
+                </div>
+                <div class="welcome-date">
+                    <i class="far fa-calendar"></i> {% now "l, F j, Y" %}
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon patients-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>Total Patients</h3>
+                        <p class="stat-number">{{ total_patients }}</p>
+                        <p class="stat-label">Active patients</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon appointments-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>Upcoming</h3>
+                        <p class="stat-number">{{ upcoming_appointments }}</p>
+                        <p class="stat-label">Scheduled appointments</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon messages-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>Messages</h3>
+                        <p class="stat-number">{{ unread_notifications }}</p>
+                        <p class="stat-label">Unread notifications</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="appointments-section">
+                <div class="section-header">
+                    <h2>Today's Appointments</h2>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="appointments-table-container">
+                    <table class="appointments-table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Date & Time</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for patient in patients %}
+                                <tr>
+                                    <td>
+                                        <div class="patient-info">
+                                            <div class="patient-avatar">
+                                                <img src="{% static 'images/default-avatar.png' %}" alt="{{ patient.user.first_name }}" onerror="this.src='https://ui-avatars.com/api/?name={{ patient.user.first_name }}+{{ patient.user.last_name }}&background=E0E0E0&color=333'">
+                                            </div>
+                                            <div>
+                                                <p class="patient-name">{{ patient.user.first_name }} {{ patient.user.last_name }}</p>
+                                                <p class="patient-id">ID: #{{ patient.id }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="appointment-time">
+                                            <p class="time">{{ patient.datetime|date:"g:i A" }}</p>
+                                            <p class="date">{{ patient.datetime|date:"D, M j, Y" }}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="appointment-reason">
+                                            {% if patient.message|length < 30 %}
+                                                <p>{{ patient.message }}</p>
+                                            {% else %}
+                                                <p>{{ patient.message|slice:":30" }}...</p>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge status-scheduled">Scheduled</span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <a href="#" class="btn-action btn-view" title="View Details"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="btn-action btn-edit" title="Edit Appointment"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn-action btn-cancel" title="Cancel Appointment"><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr class="empty-row">
+                                    <td colspan="5">
+                                        <div class="empty-state">
+                                            <i class="fas fa-calendar-day"></i>
+                                            <p>No appointments scheduled for today</p>
+                                            <a href="#" class="btn-primary btn-sm">Schedule New Appointment</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/doctor_dashboard.js' %}"></script>
+{% endblock %}

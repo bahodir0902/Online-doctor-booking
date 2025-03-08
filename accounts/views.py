@@ -1,14 +1,17 @@
+from django.db.models import Q
 from django.http import HttpResponse
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
+
+from medicine.models import Appointment, Notification
 from .forms import UserLoginForm, UserRegisterModelForm, ForgotPasswordForm, PassCodeVerification
 from .service import send_email_verification, send_password_verification
-from .models import CodeEmail, CodePassword
+from .models import CodeEmail, CodePassword, Doctor, CustomUser
 from django.utils import timezone
-from .utils import generate_unique_username
+from .utils import generate_unique_username, login_required, has_permission
 from django_ratelimit.decorators import ratelimit
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import Group
 
 
 # Create your views here.
@@ -109,6 +112,8 @@ def verify_email(request):
 
         user.set_password(form.cleaned_data.get('password'))
         user.save()
+        users_group, _ = Group.objects.get_or_create(name='Users')
+        user.groups.add(users_group)
         login(request, user)
         return redirect('home')
 
@@ -196,6 +201,30 @@ def create_new_password(request):
 
     return render(request, 'create_new_password.html')
 
+@login_required
+@permission_required('accounts.can_access_doctor_dashboard', raise_exception=True)
+def doctor_dashboard(request):
+    print(request.user.get_all_permissions())
 
+    doctor = Doctor.objects.filter(user_id=request.user.pk).first()
+    upcoming_appointments = Appointment.objects.filter(Q(doctor=doctor) & Q(status=Appointment.Status.PENDING)).count()
+    unread_notifications = Notification.objects.filter(Q(user_id=request.user.pk) & Q(is_read=False)).count()
+    total_patients = Appointment.objects.filter(Q(doctor=doctor) & Q(status=Appointment.Status.COMPLETED)).distinct().count()
+
+    patients = Appointment.objects.filter(Q(doctor=doctor) & Q(status=Appointment.Status.PENDING)).order_by('datetime')
+
+    print(f'{doctor=}, {upcoming_appointments=}, {request.user.pk=}')
+    data = {
+        'upcoming_appointments': upcoming_appointments,
+        'unread_notifications': unread_notifications,
+        'total_patients': total_patients,
+        'patients': patients
+    }
+    return render(request, 'doctor_home_page.html', context=data)
+
+
+@login_required
 def profile(request):
+    print(request.user.user_permissions)
+    print(request.user.get_all_permissions())
     return render(request, 'profile.html')
