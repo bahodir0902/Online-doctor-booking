@@ -39,3 +39,18 @@ class ForgotPasswordForm(forms.Form):
 
 class PassCodeVerification(forms.Form):
     code = forms.CharField(max_length=10)
+
+
+class UserProfileModelForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'username']
+        widgets = {
+            'email': forms.EmailInput
+        }
+
+    # def clean_email(self):
+    #     email = self.cleaned_data.get('email')
+    #     if get_user_model().objects.filter(email=email).exists():
+    #         raise ValidationError('User with this email already exists')
+    #     return email

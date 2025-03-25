@@ -25,7 +25,7 @@
                     <a class="nav-link active" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#booking">Book Appointment</a>
+                    <a class="nav-link" href="#">Book Appointment</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Doctors</a>
@@ -43,7 +43,7 @@
                         <ul class="dropdown-menu dropdown-menu-end insane-dropdown" aria-labelledby="profileDropdown">
                             {% if 'accounts.can_access_doctor_dashboard' in request.user.get_all_permissions %}
                             <li>
-                                <a class="dropdown-item insane-dropdown-item" href="{% url 'accounts:doctor_dashboard' %}">Dashboard</a>
+                                <a class="dropdown-item insane-dropdown-item" href="{% url 'doctor_dashboard' %}">Dashboard</a>
                             </li>
                             <li>
                                 <a class="dropdown-item insane-dropdown-item" href="{% url 'accounts:profile' %}">Profile</a>

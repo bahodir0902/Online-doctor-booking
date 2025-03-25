@@ -1,8 +1,186 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="profile-page">
+    <!-- Cover Image Section -->
+    <div class="cover-image">
+        <img src="https://via.placeholder.com/1200x300?text=Your+Cover+Image" alt="Cover Image">
+    </div>
 
-<br><p>{{ request.user.user_permissions }}</p><br>
-<p>{{ request.user.get_all_permissions }}</p>
+    <!-- Profile Card Container -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-pic">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture">
+            </div>
+            <h1 class="full-name">{{ request.user.get_full_name|default:"Your Name" }}</h1>
+            <p class="username">@{{ request.user.username|default:"username" }}</p>
+            <p class="bio">{{ bio|default:"This is your bio." }}</p>
+        </div>
 
+        <div class="profile-details">
+            <h2>Profile Information</h2>
+            <div class="details-list">
+                {% for field in form %}
+                    <div class="detail-item">
+                        <div class="field-info">
+                            <span class="field-label">{{ field.label }}:</span>
+                            <span class="field-value">{{ field.value|default:"Not provided" }}</span>
+                        </div>
+                        <div class="field-edit">
+                            <a href="{% url 'accounts:edit_profile' %}" class="btn-edit">Edit</a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="no-data">No profile data available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Basic resets and typography */
+    body {
+        margin-top: 100px;
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    }
+    .profile-page {
+        width: 100%;
+        margin: 0 auto;
+    }
+    /* Cover image styling */
+    .cover-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    /* Profile container card */
+    .profile-container {
+        background: #fff;
+        width: 90%;
+        max-width: 800px;
+        margin: -80px auto 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        overflow: hidden;
+    }
+    /* Header styling with profile picture, name, username and bio */
+    .profile-header {
+        text-align: center;
+        padding: 40px 20px;
+        background: #fff;
+        position: relative;
+    }
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .profile-pic img {
+        width: 100%;
+        height: auto;
+    }
+    .full-name {
+        margin: 20px 0 5px;
+        font-size: 2em;
+        color: #333;
+    }
+    .username {
+        color: #888;
+        font-size: 1.2em;
+    }
+    .bio {
+        margin-top: 15px;
+        font-size: 1em;
+        color: #555;
+    }
+    /* Details section */
+    .profile-details {
+        padding: 30px 40px;
+    }
+    .profile-details h2 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 1.5em;
+    }
+    .details-list {
+        margin: 0;
+        padding: 0;
+    }
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background 0.3s;
+    }
+    .detail-item:hover {
+        background: #f9f9f9;
+    }
+    .field-info {
+        display: flex;
+        flex-direction: column;
+    }
+    .field-label {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 5px;
+    }
+    .field-value {
+        color: #666;
+        font-size: 1em;
+    }
+    /* Edit button styling with hover animation */
+    .btn-edit {
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn-edit:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+    .no-data {
+        text-align: center;
+        color: #999;
+        font-size: 1em;
+        margin: 20px 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .profile-container {
+            margin: -60px auto 20px;
+        }
+        .profile-header {
+            padding: 30px 15px;
+        }
+        .full-name {
+            font-size: 1.5em;
+        }
+        .username {
+            font-size: 1em;
+        }
+        .profile-details {
+            padding: 20px;
+        }
+        .btn-edit {
+            padding: 6px 12px;
+            font-size: 0.8em;
+        }
+    }
+</style>
 {% endblock %}

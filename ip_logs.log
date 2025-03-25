@@ -1,0 +1,118 @@
+2025-03-15 15:41:21,360 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:44:47,189 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:45:08,885 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:46:45,493 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:47:03,321 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:47:10,591 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:47:10,660 - django.request - ERROR - Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py", line 230, in profile
+    'bio': doctor.biography,
+           ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'biography'
+2025-03-15 15:48:05,890 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:48:05,942 - django.request - ERROR - Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py", line 230, in profile
+    'bio': doctor.biography,
+           ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'biography'
+2025-03-15 15:48:06,389 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:48:06,425 - django.request - ERROR - Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py", line 230, in profile
+    'bio': doctor.biography,
+           ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'biography'
+2025-03-15 15:48:06,827 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:48:06,874 - django.request - ERROR - Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py", line 230, in profile
+    'bio': doctor.biography,
+           ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'biography'
+2025-03-15 15:48:47,938 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:48:49,942 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:48:49,978 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:48:50,797 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:49:33,786 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:49:37,399 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:49:38,464 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:50:36,825 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:50:36,843 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:50:40,973 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:50:46,445 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:50:48,232 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:54:01,541 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:54:01,648 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:54:55,305 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:55:33,418 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:55:46,211 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:55:46,244 - django.request - ERROR - Internal Server Error: /accounts/auth/
+Traceback (most recent call last):
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py", line 19, in auth
+    print(user_agent)
+    ^^^^^^
+NameError: name 'logger' is not defined
+2025-03-15 15:55:46,512 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:55:47,657 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:55:48,014 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:56:17,179 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:56:19,938 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:56:24,283 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-15 15:56:25,341 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 15:56:25,431 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 16:08:55,227 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/config/settings.py changed, reloading.
+2025-03-15 16:08:57,145 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 16:09:14,630 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/config/settings.py changed, reloading.
+2025-03-15 21:09:15,360 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 21:09:20,398 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/config/settings.py changed, reloading.
+2025-03-15 21:09:42,496 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-15 22:28:53,299 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/middlewares.py changed, reloading.
+2025-03-16 14:05:11,141 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/utils.py changed, reloading.
+2025-03-16 14:05:13,229 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/views.py changed, reloading.
+2025-03-16 14:13:40,048 - django.utils.autoreload - INFO - /home/bahodir/Documents/Django/Projects/Medical project/accounts/utils.py changed, reloading.
+2025-03-16 14:54:45,125 - accounts.middlewares - INFO - 127.0.0.1
+2025-03-16 14:54:45,139 - django.request - WARNING - Not Found: /shop/list/

@@ -757,4 +757,4 @@ setTimeout(function() {
             updateNumber();
         }
     });
-}, 300);
+}, 100);

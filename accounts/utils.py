@@ -1,7 +1,11 @@
 import random
 import uuid
+import pandas as pd
+import os
 
 from django.shortcuts import redirect
+
+from config import settings
 
 
 def generate_random_code():
@@ -32,3 +36,11 @@ def has_permission(ROLE):
 
         return wrapper
     return decorator
+
+
+def export_excel(users_list):
+    path = os.path.join(settings.MEDIA_ROOT, 'exported/users_lists')
+    df = pd.DataFrame(users_list)
+    df.to_excel('users_list.xlsx', index=False)
+    return path
+
